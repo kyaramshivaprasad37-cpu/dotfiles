@@ -33,7 +33,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-tokyo-night)
+(setq doom-theme 'doom-gruvbox-light)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -160,3 +160,42 @@
                  (vterm-send-string
                   (format "gcc %s -o /tmp/org_run && /tmp/org_run\n" tmpfile))))))
 
+;;(after! treemacs
+;;  (treemacs-add-project-to-workspace (expand-file-name "~/") "home"))
+
+(map! :leader "." #'dired-jump)
+
+(use-package! typst-ts-mode
+  :config
+  (setq typst-ts-mode-watch-options "--open"))
+
+(solaire-global-mode)
+
+;; org-modern
+(use-package! org-modern
+  :hook (org-mode . org-modern-mode)
+  :config
+  (setq org-modern-star '("◉" "○" "✸" "✿" "✤" "✜")
+        org-modern-table t
+        org-modern-list '((?- . "•") (?+ . "◦") (?* . "▸"))
+        org-modern-checkbox '((?X . "☑") (?- . "☐") (?\s . "☐"))))
+
+;; For rounded corners
+(setq svg-tag-tags
+      '(("TODO" . ((lambda (tag) (svg-tag-make tag :bg "#c17b7b" :fg "#ffffff" :radius 5))))
+        ("NEXT" . ((lambda (tag) (svg-tag-make tag :bg "#7b96c1" :fg "#ffffff" :radius 5))))
+        ("DONE" . ((lambda (tag) (svg-tag-make tag :bg "#7bc18a" :fg "#ffffff" :radius 5))))
+        ("SCHEDULED" . ((lambda (tag) (svg-tag-make tag :bg "#9b7bc1" :fg "#ffffff" :radius 5))))
+        ("WAIT" . ((lambda (tag) (svg-tag-make tag :bg "#c1a87b" :fg "#ffffff" :radius 5))))))
+
+;; For floating minibuffer
+(use-package! vertico-posframe
+  :after vertico
+  :config
+  (vertico-posframe-mode 1)
+  (setq vertico-posframe-width 80
+        vertico-posframe-height 20
+        vertico-posframe-border-width 2
+        vertico-posframe-parameters
+        '((left-fringe . 8)
+          (right-fringe . 8))))

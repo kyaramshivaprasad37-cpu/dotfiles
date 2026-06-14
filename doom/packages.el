@@ -57,3 +57,7 @@
 (package! move-text)
 (package! elfeed)
 (package! elfeed-goodies)
+(package! typst-ts-mode)
+(package! org-modern)
+(package! svg-tag-mode)
+(package! vertico-posframe)
