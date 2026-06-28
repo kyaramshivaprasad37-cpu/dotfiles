@@ -179,7 +179,7 @@
 ;;(after! treemacs
 ;;  (treemacs-add-project-to-workspace (expand-file-name "~/") "home"))
 
-(map! :leader "." #'dired-jump)
+;;(map! :leader "." #'dired-jump)
 
 (use-package! typst-ts-mode
   :config
@@ -234,3 +234,17 @@
   :config
   (add-hook 'org-mode-hook #'org-mindmap-mode)
   (setq org-mindmap-default-paint-depth nil))
+
+;; cursor modification in normal mode
+(setq-default cursor-type 'box)
+
+(setq evil-normal-state-cursor  'box
+      evil-insert-state-cursor  'box
+      evil-visual-state-cursor  'box
+      evil-replace-state-cursor 'box
+      evil-operator-state-cursor 'box)
+
+;; mapping jk to escape key
+(after! evil-escape
+  (setq evil-escape-key-sequence "jk"
+        evil-escape-delay 0.25))
